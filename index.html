@@ -8,6 +8,12 @@
     <title>valentine?</title>
 </head>
 <body class="container">
+    <!-- Audio element for background music (hidden) -->
+    <audio id="bgMusic" loop>
+        <source src="https://files.catbox.moe/8b2x1d.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+    
     <div class="night"></div>
     <div class="text">
         <div class="wrapper">
@@ -15,7 +21,7 @@
             <div class="lid two"></div>
             <div class="envelope"></div>
             <div class="letter">
-                <p>kode : ownerdermawan ♥️👅 #tidakkikir</p>
+                <p>kode : ownerdermawan ♥️👅</p>
             </div>
         </div>
         <div class="buttons">
@@ -321,5 +327,26 @@
       </div>
     </div>
     <script src="script.js"></script>
-  </body>
+    <script>
+        // Play background music when the page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            const bgMusic = document.getElementById('bgMusic');
+            
+            // Many browsers require user interaction before playing audio
+            // So we'll start muted and wait for a user click to unmute
+            bgMusic.muted = true;
+            bgMusic.play().then(() => {
+                // Once playback starts successfully, we can unmute on user interaction
+                document.body.addEventListener('click', function() {
+                    bgMusic.muted = false;
+                }, { once: true });
+            }).catch(error => {
+                console.log("Autoplay was prevented:", error);
+            });
+            
+            // Alternatively, you could add a play button for the music
+            // But this approach will start playing when the user interacts with the page
+        });
+    </script>
+</body>
 </html>
